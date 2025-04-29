@@ -22,3 +22,17 @@ const Header = ({ title }) => {
 };
 
 export default Header;
+/* 
+const App=()=> {
+  const [message, setMessage] = useState("");
+  const [token] = useContext(UserContext);
+
+  const getWelcomeMessage = async () => {
+    const requestOptions = {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+
+*/

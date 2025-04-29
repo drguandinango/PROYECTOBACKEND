@@ -5,7 +5,20 @@ import Login from "./components/Login";
 import Header from "./components/Header";
 import Table from "./components/Table";
 import { UserContext } from "./context/UserContext";
+/* 
+const App=()=> {
+  const [message, setMessage] = useState("");
+  const [token] = useContext(UserContext);
 
+  const getWelcomeMessage = async () => {
+    const requestOptions = {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+
+*/
 const App=()=> {
   const [message, setMessage] = useState("");
   const [token] = useContext(UserContext);
