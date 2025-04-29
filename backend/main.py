@@ -19,8 +19,9 @@ async def create_user(
     if db_user:
         raise _fastapi.HTTPException(status_code=400, detail="Email already in use")
         
-    return await _services.create_user(user, db)
-  #  return await _services.create_token(user)
+    user = await _services.create_user(user, db)
+    
+    return await _services.create_token(user)
 #ddssss
 @app.post("/api/token")
 async def generate_token(
@@ -50,4 +51,4 @@ async def create_lead(
 
 @app.get("/api")
 async def root():
-    return {"message": "Awesome Leads Manager"}
+    return {"message": "Bienvenido al sistema"}
