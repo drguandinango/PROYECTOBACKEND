@@ -42,7 +42,14 @@ const App=()=> {
               <Register /> <Login />
             </div>
           ) : (
-            <Table />
+              <div className="columns">
+                  <div className="column is-half">
+                      <Register /> {/* Mostrar el registro solo si hay token */}
+                  </div>
+                  <div className="column is-half">
+                      <Table />
+                  </div>
+              </div>
           )}
         </div>
         <div className="column"></div>
