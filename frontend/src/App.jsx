@@ -4,7 +4,7 @@ import Login from "./components/Login";
 import Header from "./components/Header";
 import Table from "./components/Table";
 import { UserContext } from "./context/UserContext";
-
+//se estpá haciendo lo siguiente : AE-54  Creación de formulario de registro de usuario separado con validaciones de cliente
 const App = () => {
     const [message, setMessage] = useState("");
     const [token] = useContext(UserContext);
