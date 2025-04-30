@@ -14,14 +14,14 @@ async def create_user(
     user: _schemas.UserCreate, db: _orm.Session = _fastapi.Depends(_services.get_db)
 ):
     
-#""" se KJSJSJSJ conencta con FASTPIminuto 4:12 """
+    """Crea un nuevo usuario (requiere autenticación)."""
     db_user = await _services.get_user_by_email(user.email, db)
     if db_user:
         raise _fastapi.HTTPException(status_code=400, detail="Email already in use")
-        
+
     user = await _services.create_user(user, db)
-    
-    return await _services.create_token(user)
+
+    return user
 #ddssss
 @app.post("/api/token")
 async def generate_token(
