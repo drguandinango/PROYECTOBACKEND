@@ -9,16 +9,15 @@ import services as _services, schemas as _schemas
 app = _fastapi.FastAPI()
 
 
-@app.post("/api/users")
+@app.post("/api/users", response_model=_schemas.User, dependencies=[_fastapi.Depends(_services.get_current_user)])
 async def create_user(
     user: _schemas.UserCreate, db: _orm.Session = _fastapi.Depends(_services.get_db)
 ):
-    
     """Crea un nuevo usuario (requiere autenticación)."""
     db_user = await _services.get_user_by_email(user.email, db)
     if db_user:
         raise _fastapi.HTTPException(status_code=400, detail="Email already in use")
-
+#"""GERENRANDO EL RETORNO DE TOKEN AL CREARSE EL USUARIO"""
     user = await _services.create_user(user, db)
 
     return user
@@ -32,11 +31,15 @@ async def generate_token(
 
     if not user:
         raise _fastapi.HTTPException(status_code=401, detail="Invalid Credentials")
-#"""GERENRANDO EL RETORNO DE TOKEN AL CREARSE EL USUARIO"""
+
     return await _services.create_token(user)
 
 
-#se retiene el retorno de la api  a la que el front puede acceder , para pruebas .
+@app.get("/api/users/me", response_model=_schemas.User)
+async def get_user(user: _schemas.User = _fastapi.Depends(_services.get_current_user)):
+    return user
+
+
 @app.post("/api/leads", response_model=_schemas.Lead)
 async def create_lead(
     lead: _schemas.LeadCreate,
