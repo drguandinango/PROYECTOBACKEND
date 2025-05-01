@@ -32,7 +32,7 @@ async def generate_token(
 
     if not user:
         raise _fastapi.HTTPException(status_code=401, detail="Invalid Credentials")
-
+#"""GERENRANDO EL RETORNO DE TOKEN AL CREARSE EL USUARIO"""
     return await _services.create_token(user)
 
 
