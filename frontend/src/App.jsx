@@ -3,12 +3,10 @@ import Register from "./components/Register";
 import Login from "./components/Login";
 import Header from "./components/Header";
 import { UserContext } from "./context/UserContext";
-import ErrorMessage from "./components/ErrorMessage"; // Importa ErrorMessage si no lo tienes aquí
 
 const App = () => {
     const [message, setMessage] = useState("");
     const [token] = useContext(UserContext);
-    const [leadsError, setLeadsError] = useState(""); // Estado para el error de leads
 
     const getWelcomeMessage = async () => {
         const requestOptions = {
@@ -35,27 +33,23 @@ const App = () => {
     return (
         <>
             <Header title={message} />
-            <div className="columns">
-                <div className="column"></div>
+            <div className="columns is-centered"> {/* Centramos las columnas */}
                 <div className="column m-5 is-two-thirds">
                     {!token ? (
-                        <div className="columns">
-                            <Login />
+                        <div className="columns is-centered"> {/* Centramos el login también */}
+                            <div className="column is-half">
+                                <Login />
+                            </div>
                         </div>
                     ) : (
-                        <div className="columns">
+                        <div className="columns is-centered"> {/* Centramos el formulario de registro */}
                             <div className="column is-half">
                                 <Register />
                             </div>
-                            {/* Ocultamos la tabla y el mensaje de error de leads */}
-                            {/* {leadsError && <ErrorMessage message={leadsError} />} */}
-                            {/* <div className="column is-half">
-                                <Table />
-                            </div> */}
+                            {/* Ocultamos la tabla de leads */}
                         </div>
                     )}
                 </div>
-                <div className="column"></div>
             </div>
         </>
     );
